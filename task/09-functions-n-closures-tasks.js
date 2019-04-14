@@ -26,7 +26,15 @@
  *
  */
 function getComposition(f,g) {
-    throw new Error('Not implemented');
+    if (arguments.length >= 2) {
+        let my_arguments = [];
+        for (let i = 0; i < arguments.length; i++)
+            my_arguments.push(arguments[i]);  
+        return ((...my_arguments) => f(g(...my_arguments)));
+      }
+      else {
+        return (func => f(g(x)));
+      }
 }
 
 
@@ -47,7 +55,10 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    throw new Error('Not implemented');
+    function getCalculate(x) {
+    return Math.pow(x,exponent)
+    }
+    return getCalculate
 }
 
 

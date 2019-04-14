@@ -92,11 +92,21 @@ function UrlShortener() {
 UrlShortener.prototype = {
 
     encode: function(url) {
-        throw new Error('Not implemented');
+        let s = url.split('')
+            .reduce((pv, cv) => pv + (this.urlAllowedChars.indexOf(cv) < 10 ? '0' : '') + this.urlAllowedChars.indexOf(cv), '');
+        let answer = '';
+        if (s.length % 4 !== 0) s += '99';
+        while (s.length > 0) {
+            answer += String.fromCharCode(s.slice(0, 4));
+            s = s.slice(4);
+        }
+        return answer;
     },
     
     decode: function(code) {
-        throw new Error('Not implemented');
+        let answer = '';
+        return code.split('')
+            .reduce((pv, cv) => pv += this.urlAllowedChars[Math.floor(cv.charCodeAt(0) / 100)] + (cv.charCodeAt(0) % 100 !== 99 ? this.urlAllowedChars[cv.charCodeAt(0) % 100] : ''), '');
     } 
 }
 

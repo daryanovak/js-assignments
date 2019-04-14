@@ -282,16 +282,16 @@ function propagateItemsByPositionIndex(arr) {
    let newArray = [];
    let additions = 0;
    arr.map(function (k, x) {
-   createArray(k, x);
-   additions = 0;
+      createArray(k, x);
+      additions = 0;
    });
    return newArray
    function createArray(item, count) {
-   if (additions <= count) {
-   newArray.push(item);
-   ++additions
-   createArray(item, count);
-   }
+      if (additions <= count) {
+         newArray.push(item);
+         ++additions
+         createArray(item, count);
+      }
    }
 }
 
@@ -463,7 +463,38 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-   throw new Error('Not implemented');
+   let result = arr.sort((a, b) => {
+      if (a.country > b.country) {
+         return 1;
+      }
+      if (a.country < b.country) {
+         return -1;
+      }
+      return 0;
+   });
+   let currentCountry = result[0].country;
+   let index = 0;
+   return result.reduce((arr, val) => {
+      if (currentCountry !== val.country) {
+         currentCountry = val.country;
+         index += 1;
+      }
+      if (!arr[index]) {
+         arr[index] = [];
+      }
+      arr[index].push(val);
+      return arr;
+   }, [])
+      .map(val => val.sort((a, b) => {
+         if (a.city > b.city) {
+            return 1;
+         }
+         if (a.city < b.city) {
+            return -1;
+         }
+         return 0;
+      }))
+      .flat();
 }
 
 /**
@@ -597,7 +628,9 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-   let array = []
+   return indexes.reduce((result, current) => {
+      return result[current];
+    }, arr);
 }
 
 
@@ -620,7 +653,8 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
+   let half = arr.length / 2;
+   return arr.slice(half + arr.length % 2).concat(arr.slice(half, half + arr.length % 2)).concat(arr.slice(0, half));
 }
 
 

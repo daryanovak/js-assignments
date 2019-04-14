@@ -17,8 +17,13 @@
  *  ]
  */
 function createCompassPoints() {
-    throw new Error('Not implemented');
-    var sides = ['N','E','S','W'];  // use array of cardinal directions only!
+    let arr =  ['N', 'NbE', 'NNE', 'NEbN', 'NE', 'NEbE', 'ENE', 'EbN', 'E', 'EbS', 'ESE', 'SEbE', 'SE', 'SEbS', 'SSE', 'SbE', 'S','SbW', 'SSW', 'SWbS', 'SW', 'SWbW', 'WSW', 'WbS', 'W', 'WbN', 'WNW', 'NWbW', 'NW', 'NWbN', 'NNW', 'NbW'];
+    return arr.map(function(element) {
+        return{
+            abbreviation: element,
+            azimuth: arr.indexOf(element) * 11.25
+        }
+    });
 }
 
 
@@ -88,7 +93,17 @@ function* expandBraces(str) {
  *
  */
 function getZigZagMatrix(n) {
+    // let combined = Array.apply(null, {length: n*n}).map(Number.call, Number)
+    // let final = [];
+    // for(let i = 0; final.length < combined.length; i++) {
+    //   const high = combined.splice(combined.length - 1, 1);
+    //   const low = combined.splice(0, 1);
+    //   final = [...final, ...high, ...low];
+    //   final.push(...high, ...low);
+    // } 
+    // return final;
     throw new Error('Not implemented');
+
 }
 
 
