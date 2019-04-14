@@ -611,7 +611,10 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-    throw new Error('Not implemented');
+   //  return arr.map(function(name) {
+   //    return childrenSelector(name);
+   //  });
+   throw new Error('Not implemented');
 }
 
 

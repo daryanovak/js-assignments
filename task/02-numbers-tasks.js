@@ -185,7 +185,6 @@ function getParallelipidedDiagonal(a,b,c) {
  */
 function roundToPowerOfTen(num, pow) {
     return (num/(Math.pow(10,pow))).toFixed()*Math.pow(10,pow);
-    // throw new Error('Not implemented');
 }
 
 /**
@@ -231,7 +230,6 @@ function toNumber(value, def) {
         return +value;
     else 
         return def
-    // throw new Error('Not implemented');
 }
 
 module.exports = {
