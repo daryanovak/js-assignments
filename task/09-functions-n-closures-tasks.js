@@ -95,9 +95,9 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+    let memo = func()
+    return () => memo;
 }
-
 
 /**
  * Returns the function trying to call the passed function and if it throws,
@@ -160,8 +160,8 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(fn) {
-    throw new Error('Not implemented');
+function partialUsingArguments(fn, ...parentArgs) {
+    return (...args) => fn(...parentArgs, ...args)
 }
 
 
@@ -182,7 +182,8 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    throw new Error('Not implemented');
+    let startFromVal = startFrom - 1;
+    return () => startFromVal += 1; 
 }
 
 

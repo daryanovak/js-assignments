@@ -131,7 +131,11 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    let top = { top: rect1.top, left: rect1.left }, 
+    left = { top: rect1.top + rect1.width, left: rect1.left + rect1.height }, 
+    buttom = { top: rect2.top, left: rect2.left }, 
+    right = { top: rect2.top + rect2.width, left: rect2.left + rect2.height };
+    return (top.top >= right.top || buttom.top >= left.top) || (top.left >= right.left || buttom.left >= left.left) ? false : true 
 }
 
 
@@ -162,7 +166,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    return Math.sqrt((circle.center.x-point.x)*(circle.center.x-point.x) + (circle.center.y-point.y)*(circle.center.y-point.y)) < circle.radius
 }
 
 
@@ -178,7 +182,13 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    for (var i = 0; i < str.length; i++) {
+        var c = str.charAt(i);
+        if (str.indexOf(c) == i && str.indexOf(c, i + 1) == -1) {
+          return c;
+        }
+      }
+      return null;
 }
 
 
@@ -221,7 +231,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    return str.split("").reverse().join("")
 }
 
 
@@ -238,7 +248,8 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    let a =  num.toString().split("").reverse().join("")
+    return +a
 }
 
 
@@ -263,7 +274,14 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    for (var i = 0, len = ccn.toString().length, digits = [], sum = 0; i < len; i++) digits.push(+ccn.toString()[i])
+    for (i = len % 2 === 0 ? 0 : 1; i < len; i += 2) {
+      digits[i] *= 2
+      digits[i] > 9 && (digits[i] -= 9)
+    }
+    for (i = 0; i < len; i++) sum += digits[i]
+    return sum % 10 === 0
+ 
 }
 
 
@@ -282,7 +300,10 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    while (num.toString().length >= 2) { 
+        num = num.toString().split("").map(Number).reduce((sum, current)=> sum + current);
+      }
+    return num;
 }
 
 
@@ -408,7 +429,19 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    var aNumRows = m1.length, aNumCols = m1[0].length,
+        bNumRows = m2.length, bNumCols = m2[0].length,
+        m = new Array(aNumRows);  // initialize array of rows
+    for (var r = 0; r < aNumRows; ++r) {
+        m[r] = new Array(bNumCols); // initialize the current row
+        for (var c = 0; c < bNumCols; ++c) {
+            m[r][c] = 0;             // initialize the current cell
+            for (var i = 0; i < aNumCols; ++i) {
+                m[r][c] += m1[r][i] * m2[i][c];
+            }
+        }
+    }
+    return m;
 }
 
 

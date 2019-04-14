@@ -588,7 +588,6 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
    return array.reduce((myMap, item) => {
-      console.log(myMap);
       if(myMap.get(keySelector(item))){
          myMap.set(keySelector(item), [ ...myMap.get(keySelector(item)), valueSelector(item)])
       } else {
@@ -611,10 +610,10 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-   //  return arr.map(function(name) {
-   //    return childrenSelector(name);
-   //  });
-   throw new Error('Not implemented');
+    return arr.map(function(name) {
+      return childrenSelector(name);
+    })
+      .reduce((prev, curr) => prev.concat(curr));
 }
 
 
